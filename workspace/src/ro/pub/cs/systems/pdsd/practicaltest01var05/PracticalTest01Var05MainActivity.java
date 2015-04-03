@@ -2,6 +2,7 @@ package ro.pub.cs.systems.pdsd.practicaltest01var05;
 
 import ro.pub.cs.systems.pdsd.practicaltest01var05.R;
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 public class PracticalTest01Var05MainActivity extends Activity {
 
 	protected ButtonClickListener buttonListener = new ButtonClickListener();
+	private final static int SECONDARY_ACTIVITY_REQUEST_CODE = 1;
 	protected int number_of_registers;
 	
 	protected class ButtonClickListener implements View.OnClickListener {
@@ -54,7 +56,12 @@ public class PracticalTest01Var05MainActivity extends Activity {
 					break;
 					
 				case R.id.navigate_to_second_activity:
-					
+					Intent intent = new Intent(
+							"ro.pub.cs.systems.pdsd.intent.action.PracticalTest01Var05SecondaryActivity");
+					intent.putExtra("number_of_registers", Integer.toString(number_of_registers));
+					intent.putExtra("directions", myText);
+					startActivityForResult(intent,
+							SECONDARY_ACTIVITY_REQUEST_CODE);
 					break;
 				}
 			}
@@ -79,6 +86,9 @@ public class PracticalTest01Var05MainActivity extends Activity {
 		Button westButton = (Button) findViewById(R.id.west);
 		westButton.setOnClickListener(buttonListener);
 		
+		Button navigateToSecondActivity = (Button) findViewById(R.id.navigate_to_second_activity);
+		navigateToSecondActivity.setOnClickListener(buttonListener);
+		
 		if (savedInstanceState != null) {
 			String numberElem = savedInstanceState.getString("numberOfRegisters");
 			if (numberElem != null){
@@ -96,6 +106,19 @@ public class PracticalTest01Var05MainActivity extends Activity {
 	@Override
 	protected void onSaveInstanceState(Bundle outState) {
 		outState.putString("numberOfRegisters", Integer.toString(number_of_registers));
+	}
+	
+	@Override
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		switch(resultCode){
+			case RESULT_OK:
+				number_of_registers += 1;
+				break;
+			case RESULT_CANCELED:
+				break;
+		}
+		TextView myTextView = (TextView)findViewById(R.id.coordinates);
+		myTextView.setText("");
 	}
 
 	@Override

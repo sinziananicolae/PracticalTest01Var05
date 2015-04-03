@@ -4,11 +4,15 @@
     <string name="app_name">PracticalTest01Var05</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
-    
     <string name="north">North</string>
     <string name="west">West</string>
     <string name="east">East</string>
     <string name="south">South</string>
     <string name="navigate">Navigate to second activity</string>
+    <string name="title_activity_practical_test01_var05_secondary">PracticalTest01Var05SecondaryActivity</string>
+    <string name="register">Register</string>
+    <string name="cancel">Cancel</string>
+    <string name="number_of_reg">No of registers: ???</string>
+    <string name="directions_list">Directions: ???</string>
 
 </resources>
